@@ -94,22 +94,7 @@ A known mismatch with the field literature: in roadless landscapes the model los
 
 ## Literature
 
-Checked in this session (title, venue and the claim used were confirmed from an abstract or a reliable summary; full texts not yet read):
-
-- Hels, T. and Buchwald, E. (2001). The effect of road kills on amphibian populations. Biological Conservation 99: 331-340. Probability of being killed crossing: 0.34-0.61 on a road with 3,207 vehicles/day, 0.89-0.98 on a motorway.
-- Rytwinski, T. et al. (2016). How effective is road mitigation at reducing road-kill? A meta-analysis. PLoS ONE. Mitigation reduces road-kill by 40% on average; fences, with or without crossing structures, by 54%; crossing structures alone showed no detectable effect.
-- Rabie, P. A. et al. (2024). Journal of Field Ornithology. About 96 million birds per year killed by vehicles in the continental USA (95% CI 59-200 million).
-- U.S. Fish and Wildlife Service, "Threats to birds: collisions - road vehicles": cites an estimate of 89-340 million birds per year (attributed elsewhere to Loss, Will and Marra; exact paper and year still to confirm).
-- Sievers, M. et al. (2018). Stormwater wetlands can function as ecological traps for urban frogs. Ecological Applications.
-- Clevenot, L., Carré, C. and Pech, P. (2018). Review of 25 studies of amphibians in stormwater ponds as traps or breeding sites. Frontiers in Ecology and Evolution 6: 40.
-- Talent, L. G. et al. (1983). Condor 85: 74-78. Few ducklings and no whole broods lost during overland travel.
-- Dzus, E. H. and Clark, R. G. (1997). Wilson Bulletin 109: 504-515. 52 radio-tracked mallard broods; survival in the first two weeks not related to overland distance.
-- Simpson, J. W. et al. (2007). Effects of habitat on mallard duckling survival in the Great Lakes region. Journal of Wildlife Management 71(6).
-- USGS Western Ecological Research Center (2025). Duckling survival higher when nests are closer to flooded wetlands (Suisun Marsh).
-- Southworth, M. and Ben-Joseph, E. (1995). Street standards and the shaping of suburbia. Journal of the American Planning Association 61(1): 65-81.
-- Aresco, M. J. (2005). Mitigation measures to reduce highway mortality of turtles and other herpetofauna at a north Florida lake. Journal of Wildlife Management 69(2): 549-560. Drift fences leading turtles to an existing culvert under a four-lane highway; turtle road mortality fell from 11.9 to 0.09 per km per day, and 84 of 8,475 turtles got over or through the fence. This is the closest real case to the model's "underpasses + drift fence".
-- Dodd, C. K., Barichivich, W. J. and Smith, L. L. (2004). Effectiveness of a barrier wall and culverts in reducing wildlife mortality on a heavily traveled highway in Florida. Biological Conservation 118: 619-631. Road kills fell from 2,411 to 158 in a year (excluding treefrogs), and about 73% of the remaining kills were on the 400 m beyond the end of the wall. The fence-end effect is testable in the model.
-- Boeing, G. (2020 preprint, arXiv:2010.04771). Off the grid... and back again? The recent evolution of American street network planning and design.
+Checked sources, with full citations, links, and what each is used for, are in [REFERENCES.md](REFERENCES.md) (BibTeX in [references.bib](references.bib)). Fourteen sources so far: road ecology and mitigation (Hels and Buchwald 2001; Rytwinski et al. 2016; Aresco 2005; Dodd et al. 2004), bird road mortality (Rabie et al. 2024; USFWS), duckling overland travel (Talent et al. 1983; Dzus and Clark 1997; Simpson et al. 2007; USGS 2025), stormwater ponds as traps (Sievers et al. 2018; Clevenot et al. 2018), and street-network form (Southworth and Ben-Joseph 1995; Boeing 2021).
 
 From memory, not yet checked (do not cite until verified):
 

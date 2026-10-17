@@ -6,6 +6,7 @@ A mother picks her nest by seclusion, as birds always have. She knows which way 
 
 - [PLAN.md](PLAN.md): the research question, the experiments, angles for a paper, parameter provenance, literature, and open questions.
 - [RESULTS.md](RESULTS.md): the first results, with figures.
+- [REFERENCES.md](REFERENCES.md): checked sources, with links and what each is used for ([references.bib](references.bib) for the paper).
 
 ## Quick start
 
