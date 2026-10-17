@@ -162,7 +162,12 @@ export const EXPERIMENTS = {
     // S2. Sensitivity to the greedy navigator's two free parameters.
     's2-navigator-sensitivity': {
         question: 'Do results depend on how the greedy mama handles obstacles?',
-        variants: [0, 0.35, 1].flatMap(noise => [0.25, 1, 4].map(memory =>
-            v(`noise ${noise}, memory ${memory}`, {layout: {type: 'suburban'}, birds: {noise, memory}}))),
+        variants: [
+            ...[0, 0.35, 1].flatMap(noise => [0.25, 1, 4].map(memory =>
+                v(`noise ${noise}, memory ${memory}`, {layout: {type: 'suburban'}, birds: {noise, memory}}))),
+            // Heading persistence: a mother keeps walking the way she was going along a fence.
+            ...[2, 4].map(persistence =>
+                v(`persistence ${persistence}`, {layout: {type: 'suburban'}, birds: {persistence}})),
+        ],
     },
 };

@@ -149,8 +149,9 @@ export const LAYOUTS = {
                 w.road('h', ly1, lx0, lx1 + lanesR - 1, 'residential', lanesR);
                 w.road('v', lx0, ly0, ly1 + lanesR - 1, 'residential', lanesR);
                 w.road('v', lx1, ly0, ly1 + lanesR - 1, 'residential', lanesR);
-                // Two connector streets out to the arterials (north and south).
-                const cx = Math.floor((x0 + x1) / 2);
+                // Two connector streets out to the arterials (north and south), centred on
+                // the part of the superblock inside the map, so a clipped superblock keeps its exits.
+                const cx = Math.floor((Math.max(x0, 0) + Math.min(x1, w.width - 1)) / 2);
                 w.road('v', cx, y0, ly0 - 1, 'residential', lanesR);
                 w.road('v', cx, ly1 + lanesR, y1, 'residential', lanesR);
                 // Cul-de-sacs from the east and west sides of the loop, pointing inward.

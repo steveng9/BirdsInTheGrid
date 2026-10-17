@@ -12,6 +12,10 @@
     <p>Each dot is a mother bird leading her young from the nest she chose to the nearest water she knows of.
         She can see which way the water is, but not the roads, fences, or gaps between her and it.</p>
 </header>
+<p id="file-warning" class="warning" hidden>This page has to be served over HTTP: run <code>npm run serve</code> in the repository and open
+    <a href="http://localhost:8000/index.html">http://localhost:8000/index.html</a>, or use the
+    <a href="https://steveng9.github.io/BirdsInTheGrid/">GitHub Pages copy</a>.</p>
+<script>if (location.protocol === 'file:') document.getElementById('file-warning').hidden = false;</script>
 <main>
     <section class="controls">
         <label>Experiment <select id="experiment"></select></label>
@@ -28,10 +32,17 @@
         <label>Seed <input id="seed" type="number" value="1"></label>
         <label>Speed (ticks / frame) <input id="speed" type="range" min="1" max="40" value="4"></label>
         <label><input id="trails" type="checkbox" checked> trails</label>
+        <label><input id="generations" type="checkbox"> generations: survivors and their young nest again next year</label>
+        <label><input id="evolve" type="checkbox"> nest choice is inherited and can evolve</label>
+        <label>Years (generations mode) <input id="years" type="number" value="40" min="1" max="500"></label>
         <div class="buttons">
-            <button id="reset">Reset</button>
-            <button id="play">Play</button>
+            <button id="restart">Restart</button>
+            <button id="pause">Pause</button>
             <button id="step">Step</button>
+        </div>
+        <div id="history-box" hidden>
+            <div id="history-stats"></div>
+            <canvas id="history" width="300" height="110"></canvas>
         </div>
         <div id="stats"></div>
         <canvas id="bars" width="300" height="130"></canvas>

@@ -11,12 +11,14 @@ A mother picks her nest by seclusion, as birds always have. She knows which way 
 
 Node 22.5 or newer, no npm dependencies (SQLite and the test runner are Node built-ins). The figures need Python 3 with matplotlib and numpy.
 
-Interactive view (ES modules need a real HTTP server; `file://` will not work):
+Interactive view, online at https://steveng9.github.io/BirdsInTheGrid/, or locally (ES modules need a real HTTP server; opening `index.html` from disk will not work):
 
 ```bash
 npm run serve                     # python3 -m http.server 8000
 open http://localhost:8000/index.html
 ```
+
+In the view, Restart rebuilds the scenario and runs it; changing a setting does the same unless you paused. With "generations" on, the surviving mothers and their young that recruit nest again the next year on the same map, and a chart shows the number of breeding females per year. The multi-year experiments (`e9`, `e10`) open in this mode.
 
 Headless experiments:
 
@@ -60,7 +62,7 @@ Each season:
 
 Two reference navigators bracket the greedy mother: `oracle` knows the map and follows the safest route (computed by Dijkstra over -log survival), and `random` walks at random.
 
-Multi-year runs (`src/core/population.js`) repeat the season. Surviving mothers return with probability 0.6. Each duckling that reached water becomes a breeding female with probability 0.15 (juvenile survival 0.3, half of them female). The population is capped at 500. Optionally, the nest weight on nearness to water is inherited with mutation.
+Multi-year runs (`src/core/population.js`) repeat the season. Surviving mothers return with probability 0.6. Each duckling that reached water becomes a breeding female with probability 0.15 (juvenile survival 0.3, half of them female). New and returning females choose new nest sites by the same rule. The population is capped at 500. Optionally, the nest weight on nearness to water is inherited with mutation.
 
 ## Layout
 

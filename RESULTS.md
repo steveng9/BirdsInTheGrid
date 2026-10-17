@@ -1,6 +1,6 @@
 # First results
 
-2026-10-17. Single-season experiments use 20 seeds; multi-year experiments use 30. Each season has 500 mothers with 8 ducklings each, on a 1.2 km square. Unless stated otherwise the water is a shoreline along the south edge, and mothers use the greedy navigator (they know which way the water is, and nothing else). Error bars and ± values are one standard error across seeds. Many parameters are still placeholders (see PLAN.md, "Parameter provenance"), so the absolute percentages below should be read as illustrations; the comparisons between layouts are what the model is for.
+2026-10-17 (suburban runs redone the same day after a map-edge fix). Single-season experiments use 20 seeds; multi-year experiments use 30. Each season has 500 mothers with 8 ducklings each, on a 1.2 km square. Unless stated otherwise the water is a shoreline along the south edge, and mothers use the greedy navigator (they know which way the water is, and nothing else). Error bars and ± values are one standard error across seeds. Many parameters are still placeholders (see PLAN.md, "Parameter provenance"), so the absolute percentages below should be read as illustrations; the comparisons between layouts are what the model is for.
 
 Regenerate everything with:
 
@@ -29,7 +29,7 @@ At a tenth of the freeway traffic the median design matters. An undivided freewa
 
 ![E2](results/figures/e2-urban-form.png)
 
-On a grid of quiet streets, smaller blocks are worse (25% of ducklings arrive with 50 m blocks, 33% with 100 m, 36% with 200 m), because a walk of fixed length crosses more streets. Adding an arterial every fourth street cuts the 100 m grid to 12.5%. The suburban superblock layout reaches 21%. Removing its sound walls or opening most back-yard gates changed that by less than 2 points, because the arterial crossing dominates either way.
+On a grid of quiet streets, smaller blocks are worse (25% of ducklings arrive with 50 m blocks, 33% with 100 m, 36% with 200 m), because a walk of fixed length crosses more streets. Adding an arterial every fourth street cuts the 100 m grid to 12.5%. The suburban superblock layout reaches 21%. Removing its sound walls or opening most back-yard gates changed that by about 1 point, because the arterial crossing dominates either way. (An earlier version of the suburban map had superblocks cut off by the map edge with no street out of them, and 14% of broods paced inside them until time ran out. The connector streets now sit in the visible part of each superblock, and no brood times out.)
 
 Most broods arrive whole or not at all, because a dead mother means a lost brood:
 
@@ -87,15 +87,28 @@ On a grid of quiet streets with the water to the east, a single mixed population
 
 ![E10](results/figures/e10-evolution.png)
 
-Here nest predation is on (nests near roads and near the shore lose more eggs), and each mother carries a heritable weight on nearness to water, which starts at zero and mutates.
+Here nest predation is on (nests near roads and near the shore lose more eggs), and each mother carries a heritable weight on nearness to water, which starts at zero and mutates. The browser view can run this: pick `e10-evolution`, and generations mode switches on.
 
-With no roads, the population sits at capacity either way. On the grid with arterials it goes extinct in about 9 years whether or not the preference can evolve. On the grid of quiet streets, evolution extends survival from 14 to 19 years but every run still goes extinct. On the same grid with traffic calmed, 5 of 30 non-evolving populations survived 60 years, against 24 of 30 evolving ones, whose mean weight on water rose from 0 to about 0.7. Evolutionary rescue happens in the model, but only where the landscape already leaves the population close to replacement.
+With no roads, the population sits at capacity either way. On the grid with arterials it goes extinct in about 9 years whether or not the preference can evolve. On the grid of quiet streets, evolution extends survival from 14 to 19 years but every run still goes extinct. On the same grid with traffic calmed, 5 of 30 non-evolving populations survived 60 years, against 24 of 30 evolving ones, whose mean weight on water rose from 0 to about 0.7.
+
+Why evolution only delays extinction on the quiet grid comes out of the yearly records (means over the 30 runs). A population replaces itself when about 2.7 young per breeding female reach water (adult survival 0.6, plus 0.15 recruits per arriving duckling). The preference rises at about the same pace in both landscapes, roughly 0.015 per year, because the mutation size sets how fast variation appears. What differs is how long the population has.
+
+| year | quiet grid: females | weight on water | young per female | calmed grid: females | weight on water | young per female |
+|---|---|---|---|---|---|---|
+| 0 | 309 | 0.01 | 1.15 | 442 | 0.02 | 2.38 |
+| 6 | 28 | 0.10 | 1.33 | 242 | 0.09 | 2.46 |
+| 12 / 10 | 6 | 0.22 | 1.73 | 175 | 0.14 | 2.41 |
+| 18 / 20 | 5 | 0.35 | 2.24 | 116 | 0.26 | 2.60 |
+| 30 | (7 of 30 left at year 21) | | | 114 | 0.40 | 2.74 |
+| 59 | | | | 178 | 0.73 | 3.09 |
+
+On the quiet grid the population loses about 60% a year at first, so by the time selection has pushed the young per female from 1.2 up to 2.2, only about five females are left, and a bad year or two at that size ends it. On the calmed grid the population loses about 10% a year, bottoms out near 114 females around year 25, and climbs back once the young per female passes replacement. This U-shaped trajectory is the standard picture of evolutionary rescue (a race between decline and adaptation). The model's version of it has a planning reading: calming traffic did not by itself save most populations (5 of 30), but it slowed the decline enough for the birds' own adaptation to finish the job (24 of 30).
 
 ## S1, S2. Sensitivity
 
 ![S1](results/figures/s1-traffic-sensitivity.png)
 
-Scaling every road's hazard from x0.1 to x2 moves the grid from 50% to 10% and the suburb from 48% to 20%, and the grid stays worse than the suburb at every setting except the lowest (x0.1, where the order flips: 50% against 48%). The barrier freeway is flat at 42% at every traffic level, since no brood crosses the barrier anyway. Changing the greedy navigator's noise and memory over a wide range moved the suburban result by less than 1 point (S2).
+Scaling every road's hazard from x0.1 to x2 moves the grid from 50% to 10% and the suburb from 52% to 20%, and the grid is worse than the suburb at every setting. The barrier freeway is flat at 42% at every traffic level, since no brood crosses the barrier anyway. Changing the greedy navigator's noise and memory over a wide range, or making the mother keep walking in the direction she was going along a fence (heading persistence 2 or 4), moved the suburban result by less than 1 point (S2).
 
 ## What these results do not yet show
 

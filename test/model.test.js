@@ -30,6 +30,11 @@ test('tunnels with drift fences make a barrier freeway safe', () => {
     assert.ok(s.youngArrivalRate > 0.95, s.youngArrivalRate);
 });
 
+test('superblocks cut off by the map edge still have a street out', () => {
+    const s = run({layout: {type: 'suburban'}});
+    assert.equal(s.broodsTimeout, 0);
+});
+
 test('oracle never does much worse than greedy', () => {
     for (const layout of [{type: 'suburban'}, {type: 'grid', arterialEvery: 4}]) {
         const g = run({layout, birds: {nav: 'greedy'}}), o = run({layout, birds: {nav: 'oracle'}});

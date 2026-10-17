@@ -62,3 +62,33 @@ export function drawBars(canvas, season) {
         g.fillText(String(counts[k] ?? 0), 116 + w, y + 13);
     });
 }
+
+/** Breeding females at the start of each year, against the cap. */
+export function drawHistory(canvas, history, capacity) {
+    const g = canvas.getContext('2d');
+    const dark = matchMedia('(prefers-color-scheme: dark)').matches;
+    const W = canvas.width, H = canvas.height, left = 32, bottom = H - 16, top = 6;
+    g.clearRect(0, 0, W, H);
+    g.font = '11px system-ui';
+    g.strokeStyle = dark ? '#3a3936' : '#dedcd5';
+    g.fillStyle = dark ? '#c3c2b7' : '#52514e';
+    g.lineWidth = 1;
+    g.beginPath(); g.moveTo(left, bottom); g.lineTo(W, bottom); g.stroke();
+    g.setLineDash([3, 3]);
+    g.beginPath(); g.moveTo(left, top); g.lineTo(W, top); g.stroke();
+    g.setLineDash([]);
+    g.fillText(String(capacity), 0, top + 4);
+    g.fillText('0', 0, bottom + 4);
+    const years = Math.max(10, history.length);
+    g.fillText(`year ${years}`, W - 44, H - 2);
+    const pts = [[0, history[0]?.breeders ?? 0], ...history.map((h, k) => [k + 1, h.nextBreeders])];
+    if (!history.length) return;
+    g.strokeStyle = '#2a78d6';
+    g.lineWidth = 2;
+    g.beginPath();
+    pts.forEach(([x, y], k) => {
+        const px = left + (W - left) * x / years, py = bottom - (bottom - top) * Math.min(y, capacity) / capacity;
+        k ? g.lineTo(px, py) : g.moveTo(px, py);
+    });
+    g.stroke();
+}

@@ -49,6 +49,7 @@ export const DEFAULTS = {
         noise: 0.35,          // greedy: sd of noise added to each step's score (cells)
         memory: 1.0,          // greedy: score penalty per previous visit to a cell
         roadAversion: 0,      // greedy: extra cost of stepping from verge onto road
+        persistence: 0,       // greedy: cost of turning, per unit of (1 - cos turn angle) / 2; a full U-turn costs this much
         maxTicks: 4000,       // [placeholder] ~ 14 h at 5 m per ~12 s
         transitHazard: 0.00005, // [placeholder] per duckling per tick (predators, exhaustion)
         mamaTransitHazard: 0.00001, // [placeholder]

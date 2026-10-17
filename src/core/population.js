@@ -33,9 +33,19 @@ export class Population {
     get extinct() { return this.mamas.length === 0; }
 
     stepYear() {
+        const season = this.startYear();
+        season.run();
+        return this.endYear(season);
+    }
+
+    // The browser animates a season between these two calls.
+    startYear() {
+        return new Season(this.world, this.fields, this.cfg, this.rng.fork(`year${this.year}`), this.mamas);
+    }
+
+    endYear(season) {
         const P = this.cfg.population, r = this.rngDemog;
-        const season = new Season(this.world, this.fields, this.cfg, this.rng.fork(`year${this.year}`), this.mamas);
-        const s = season.run();
+        const s = season.summary();
         const next = [];
         for (const b of season.broods) {
             if (b.mamaAlive && r.chance(P.adultSurvival)) next.push({species: b.species, wWater: b.wWater});

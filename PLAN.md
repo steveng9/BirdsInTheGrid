@@ -6,7 +6,7 @@ Last updated 2026-10-17.
 
 A mother duck chooses her nest by cues that worked for millions of years: cover, distance from disturbance, a dry spot. She does not choose it by asking whether her ducklings, which cannot fly for about two months, will be able to walk from there to water. In a landscape built by people, that walk can cross four lanes of traffic, run into a chain-link fence around a stormwater pond, or end against a concrete median. The project asks how much of a bird population a street network costs, through this one mechanism, and which features of the network (road class, block size, barriers, the placement of water, crossings and gaps) decide it.
 
-Two things Steven saw motivate the project. A pair of geese and five goslings circled a fenced retention pond beside a busy road, unable to get in, until three people dug a hole under the fence and led them through. And a mother duck and five ducklings, already halfway across a freeway, stepped into the HOV lane in front of Steven's car. The first is a wall problem and the second is a road problem, and the model keeps the two apart for that reason.
+Two things Steven saw motivate the project. A pair of geese and five goslings circled a fenced retention pond beside a busy road, unable to get in, until three people (Steven among them) dug a hole under the fence and led them through. The pond is at 112th and 78th in Puyallup, Washington, across from Woodland Elementary. And a mother duck and five ducklings, already halfway across a freeway, stepped into the HOV lane in front of Steven's car. The first is a wall problem and the second is a road problem, and the model keeps the two apart for that reason.
 
 ## Outputs, in order
 
@@ -19,6 +19,10 @@ Two things Steven saw motivate the project. A pair of geese and five goslings ci
 - The post and paper should be interdisciplinary, with brief but high-quality scholarship in two fields Steven is new to: (1) urban planning, with a research thrust there (street-network form, standards, retention-pond design, crossing infrastructure), and (2) conservation biology and ecology of birds and their habitats (brood movement, road ecology, ecological traps). The tone should be modest and inviting toward those fields, and every factual claim should be checked against a source. The literature list below marks which citations have been checked and which have not.
 - Short, easy-to-read Substack articles. Steven's writing guide applies.
 - The first anecdote (the geese and the fence) is probably the one to open the post with. The second may be too graphic for an opening, but it is the exact case of experiment E1 (the jersey barrier).
+- The focal species is the Canada goose (decided 2026-10-17). The current defaults are loosely mallard; the first post describes the model as it stands, and the switch to goose parameters (smaller broods, both parents guarding, higher adult survival) comes with calibration.
+- Cases are fabricated (stylised layouts), not imported from real places. The Puyallup pond can be described in the post as the anecdote's setting.
+- The paper can carry two results, one for each audience: a planning result (barriers, gaps, crossing placement) and an ALife result (the information gap, evolutionary rescue), kept short and well-founded.
+- The browser view is hosted on GitHub Pages: https://steveng9.github.io/BirdsInTheGrid/
 - Keep the model as simple as the story needs. The agents move, unlike the agents in the hierarchical-trades model, and that movement is most of the model.
 
 ## The model, in one paragraph
@@ -52,7 +56,7 @@ The headline result is expected, and on its own it would not carry a paper. Thes
 
 1. Walls and roads are different kinds of barrier, and the worst outcomes come from combining them. A jersey barrier in the median turns a crossing that half the birds survive (at moderate traffic) into one none survive, because the brood ends up pacing along the barrier on live lanes. Fences around ponds cost almost the entire cohort, and one gap per fence restores most of it (E1, E4).
 2. The information gap. Crossing structures without fences do almost nothing for a bird that knows only the direction of water, and nearly everything for a bird that knows the map (E3: 43% vs 99% at the freeway). This matches the road-ecology meta-analysis finding that crossing structures alone have no detectable effect on road-kill while fencing does (Rytwinski et al. 2016), and the model gives a mechanism for it. The gap between the greedy and oracle navigators is a measurable "cost of the evolutionary mismatch".
-3. Ecological and evolutionary traps. Nest-site cues that no longer predict success are the definition of an ecological trap (Schlaepfer et al. 2002; Robertson and Hutto 2006). E10 asks whether selection on nest choice can rescue the population (evolutionary rescue, Gomulkiewicz and Holt 1995). The first runs say yes only near the replacement threshold: on a traffic-calmed grid 24 of 30 evolving populations persisted 60 years against 5 of 30 without evolution, and on busier grids evolution only delays extinction.
+3. Ecological and evolutionary traps. Nest-site cues that no longer predict success are the definition of an ecological trap (Schlaepfer et al. 2002; Robertson and Hutto 2006). E10 asks whether selection on nest choice can rescue the population (evolutionary rescue, Gomulkiewicz and Holt 1995). The first runs say yes only near the replacement threshold: on a traffic-calmed grid 24 of 30 evolving populations persisted 60 years against 5 of 30 without evolution, and on busier grids evolution only delays extinction. The preference evolves at about the same rate in every landscape; what decides rescue is whether the population is still large when it gets there (RESULTS.md, E10). So traffic calming and evolution act together: calming buys the time that adaptation needs.
 4. Greedy navigation on a lattice with holes is a known problem in computer science: geographic routing with "voids" (greedy forwarding plus perimeter routing, as in GPSR, Karp and Kung 2000) and the robotics "bug" algorithms (Lumelsky and Stepanov 1987). Kleinberg's (2000) decentralized-search work is the classic ALife-adjacent framing of "agents that know only the direction to the target". This gives the paper a formal hook for ALife readers.
 5. Closed-form baselines. Where walks are straight, survival follows from counting road crossings (E7, and `src/core/theory.js`). Where the simulation departs from the formula, the departure has a cause the model can name: on quiet streets, birds wander into streets that run toward the water and walk along them, spending 19 ticks on the road where a straight crossing takes 12.
 6. Species and correlated risk. With species mixed in space, the number of species losing every duckling in a season matches the binomial formula n(1 - q)^(N/n). With each species nesting in its own strip of the map, losses are higher at the same total population (at 20 species, 9.3 lose every duckling against 0.85 when mixed; at 50, 26 against 13), and over 30 years only the species nesting nearest the water survive (E8, E9). The interesting claim is the second one: which species persist is decided by where they nest, not by luck.
@@ -103,6 +107,8 @@ Checked in this session (title, venue and the claim used were confirmed from an 
 - Simpson, J. W. et al. (2007). Effects of habitat on mallard duckling survival in the Great Lakes region. Journal of Wildlife Management 71(6).
 - USGS Western Ecological Research Center (2025). Duckling survival higher when nests are closer to flooded wetlands (Suisun Marsh).
 - Southworth, M. and Ben-Joseph, E. (1995). Street standards and the shaping of suburbia. Journal of the American Planning Association 61(1): 65-81.
+- Aresco, M. J. (2005). Mitigation measures to reduce highway mortality of turtles and other herpetofauna at a north Florida lake. Journal of Wildlife Management 69(2): 549-560. Drift fences leading turtles to an existing culvert under a four-lane highway; turtle road mortality fell from 11.9 to 0.09 per km per day, and 84 of 8,475 turtles got over or through the fence. This is the closest real case to the model's "underpasses + drift fence".
+- Dodd, C. K., Barichivich, W. J. and Smith, L. L. (2004). Effectiveness of a barrier wall and culverts in reducing wildlife mortality on a heavily traveled highway in Florida. Biological Conservation 118: 619-631. Road kills fell from 2,411 to 158 in a year (excluding treefrogs), and about 73% of the remaining kills were on the 400 m beyond the end of the wall. The fence-end effect is testable in the model.
 - Boeing, G. (2020 preprint, arXiv:2010.04771). Off the grid... and back again? The recent evolution of American street network planning and design.
 
 From memory, not yet checked (do not cite until verified):
@@ -111,23 +117,24 @@ From memory, not yet checked (do not cite until verified):
 - Road ecology: Forman and Alexander (1998, Annual Review of Ecology and Systematics); Forman et al. (2003, Road Ecology); Fahrig and Rytwinski (2009, Ecology and Society); van der Ree, Smith and Grilo, eds. (2015, Handbook of Road Ecology); Glista, DeVault and DeWoody (2009, Landscape and Urban Planning); Clevenger and Waltho (2000, 2005) on Banff crossing structures.
 - Brood movement: Ball et al. (1975); Rotella and Ratti (1992, J. Wildlife Management).
 - Urban form: Southworth and Ben-Joseph (1996/2003, Streets and the Shaping of Towns and Cities); Boeing (2017, OSMnx; 2019, street-network orientation and entropy).
-- Urban eco-evolution: Alberti (2015, TREE, eco-evolutionary dynamics in an urbanizing planet); Alberti et al. (2017, PNAS). Marina Alberti is at UW (Urban Design and Planning), which may make her a good person to ask.
+- Urban eco-evolution: Alberti (2015, TREE, eco-evolutionary dynamics in an urbanizing planet); Alberti et al. (2017, PNAS). 
 - Evolutionary rescue: Gomulkiewicz and Holt (1995, Evolution); Bell and Gonzalez (2009).
 - SLOSS: Diamond (1975); Simberloff and Abele (1976); Fahrig (2020, Global Ecology and Biogeography).
 - Navigation: Kleinberg (2000, Nature / STOC); Karp and Kung (2000, GPSR); Lumelsky and Stepanov (1987, bug algorithms).
 
-## Open questions for Steven
+## Decisions (Steven, 2026-10-17)
 
-1. Which bird is the focal species? The defaults are loosely mallard, which has the most brood data. The fence story was Canada geese, whose goslings walk farther and are guarded by both parents; that would change brood size, speed, and the orphaning rule.
-2. Real places. Which neighbourhoods should the OSM import start with? The pond from the geese story, if you can find it on a map, would make a good case study (and we could check whether the hole is still there).
-3. For the paper: is the centre of gravity the planning result (barriers, gaps, crossing placement) or the ALife result (information gap, evolutionary rescue)? The first runs support both; the paper probably has room for one main idea.
-4. Should the browser view be hosted on GitHub Pages so the Substack post can link to a live version?
-5. Is it worth contacting someone in urban ecology or road ecology early (for example at UW), as a reader or co-author, given the interdisciplinary aim?
+Focal species: Canada goose. Cases: fabricated. Paper: both a planning result and an ALife result. Browser view: on GitHub Pages. Collaboration: not for now. Next: the Substack post.
+
+## Open questions
+
+1. Does a fence-end effect appear in the model (Dodd et al. 2004 found most remaining kills just past the end of the wall)? A drift fence of limited length along the freeway would test it.
 
 ## Next steps
 
-1. Read the full texts of Hels and Buchwald (2001) and Rytwinski et al. (2016) and replace the traffic placeholders.
-2. Calibrate `transitHazard` against the overland-survival studies above.
-3. OSM import for two or three real neighbourhoods near water.
-4. Optimal crossing placement (E6 extension).
-5. Draft the Substack post from RESULTS.md, opening with the geese and the fence.
+1. Draft the Substack post from RESULTS.md, opening with the geese and the fence.
+2. Read the full texts of Hels and Buchwald (2001) and Rytwinski et al. (2016) and replace the traffic placeholders.
+3. Calibrate `transitHazard` against the overland-survival studies above.
+4. Switch defaults to Canada goose parameters.
+5. Optimal crossing placement (E6 extension).
+6. Generational runs in more landscapes (the browser now has a generations mode), looking for emergent outcomes beyond decline: where surviving lineages end up nesting, and whether the species that persist share a nest location.

@@ -189,16 +189,23 @@ export class Season {
         } else {
             let bs = Infinity;
             const onRoad = w.type[here] === ROAD;
+            const hx = b.hx ?? 0, hy = b.hy ?? 0, hn = Math.hypot(hx, hy);
             for (const j of nb) {
                 let s = f.distToWater[j] + B.memory * (b.visits.get(j) ?? 0) + B.noise * r.normal();
                 if (!onRoad && w.type[j] === ROAD) s += B.roadAversion;
+                if (B.persistence && hn) {
+                    const dx = j % w.width - b.x, dy = (j - j % w.width) / w.width - b.y;
+                    s += B.persistence * (1 - (dx * hx + dy * hy) / (hn * Math.hypot(dx, dy))) / 2;
+                }
                 if (s < bs) { bs = s; next = j; }
             }
         }
         b.visits.set(here, (b.visits.get(here) ?? 0) + 1);
         if (this.trackPaths) (b.path ??= [here]).push(next);
-        b.x = next % w.width;
-        b.y = (next - b.x) / w.width;
+        const nx = next % w.width, ny = (next - nx) / w.width;
+        b.hx = nx - b.x; b.hy = ny - b.y;
+        b.x = nx;
+        b.y = ny;
         b.ticks++;
     }
 
