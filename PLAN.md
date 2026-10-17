@@ -94,16 +94,16 @@ A known mismatch with the field literature: in roadless landscapes the model los
 
 ## Literature
 
-Checked sources, with full citations, links, and what each is used for, are in [REFERENCES.md](REFERENCES.md) (BibTeX in [references.bib](references.bib)). Fourteen sources so far: road ecology and mitigation (Hels and Buchwald 2001; Rytwinski et al. 2016; Aresco 2005; Dodd et al. 2004), bird road mortality (Rabie et al. 2024; USFWS), duckling overland travel (Talent et al. 1983; Dzus and Clark 1997; Simpson et al. 2007; USGS 2025), stormwater ponds as traps (Sievers et al. 2018; Clevenot et al. 2018), and street-network form (Southworth and Ben-Joseph 1995; Boeing 2021).
+Checked sources, with full citations, links, and what each is used for, are in [REFERENCES.md](REFERENCES.md) (BibTeX in [references.bib](references.bib)). Seventeen sources so far: road ecology and mitigation (Hels and Buchwald 2001; Rytwinski et al. 2016; Aresco 2005; Dodd et al. 2004), bird road mortality (Rabie et al. 2024; USFWS), duckling overland travel (Talent et al. 1983; Dzus and Clark 1997; Simpson et al. 2007; USGS 2025), stormwater ponds as traps (Sievers et al. 2018; Clevenot et al. 2018), street-network form (Southworth and Ben-Joseph 1995; Boeing 2021), ecological traps and evolutionary rescue (Schlaepfer et al. 2002; Gomulkiewicz and Holt 1995), and goose life history (BioKIDS).
 
 From memory, not yet checked (do not cite until verified):
 
-- Ecological traps: Schlaepfer, Runge and Sherman (2002, TREE); Battin (2004, Conservation Biology); Robertson and Hutto (2006, Ecology).
+- Ecological traps: Battin (2004, Conservation Biology); Robertson and Hutto (2006, Ecology).
 - Road ecology: Forman and Alexander (1998, Annual Review of Ecology and Systematics); Forman et al. (2003, Road Ecology); Fahrig and Rytwinski (2009, Ecology and Society); van der Ree, Smith and Grilo, eds. (2015, Handbook of Road Ecology); Glista, DeVault and DeWoody (2009, Landscape and Urban Planning); Clevenger and Waltho (2000, 2005) on Banff crossing structures.
 - Brood movement: Ball et al. (1975); Rotella and Ratti (1992, J. Wildlife Management).
 - Urban form: Southworth and Ben-Joseph (1996/2003, Streets and the Shaping of Towns and Cities); Boeing (2017, OSMnx; 2019, street-network orientation and entropy).
 - Urban eco-evolution: Alberti (2015, TREE, eco-evolutionary dynamics in an urbanizing planet); Alberti et al. (2017, PNAS). 
-- Evolutionary rescue: Gomulkiewicz and Holt (1995, Evolution); Bell and Gonzalez (2009).
+- Evolutionary rescue: Bell and Gonzalez (2009).
 - SLOSS: Diamond (1975); Simberloff and Abele (1976); Fahrig (2020, Global Ecology and Biogeography).
 - Navigation: Kleinberg (2000, Nature / STOC); Karp and Kung (2000, GPSR); Lumelsky and Stepanov (1987, bug algorithms).
 
@@ -117,7 +117,7 @@ Focal species: Canada goose. Cases: fabricated. Paper: both a planning result an
 
 ## Next steps
 
-1. Draft the Substack post from RESULTS.md, opening with the geese and the fence.
+1. Substack post: first draft in drafts/substack-01-birds-in-the-grid.md, awaiting Steven's edits and screenshots.
 2. Read the full texts of Hels and Buchwald (2001) and Rytwinski et al. (2016) and replace the traffic placeholders.
 3. Calibrate `transitHazard` against the overland-survival studies above.
 4. Switch defaults to Canada goose parameters.

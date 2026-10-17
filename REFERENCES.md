@@ -50,6 +50,19 @@ Frogs laid as many eggs in polluted stormwater wetlands as in clean ones, and ta
 **Clevenot, L., Carré, C. and Pech, P. (2018).** A review of the factors that determine whether stormwater ponds are ecological traps and/or high-quality breeding sites for amphibians. *Frontiers in Ecology and Evolution* 6: 40. doi:10.3389/fevo.2018.00040. [PDF](https://www.frontiersin.org/articles/10.3389/fevo.2018.00040/pdf)
 A review of 25 studies, mostly in Europe and North America. It establishes that highway and urban stormwater ponds are similar in structure and function, and lists the pond features that decide whether a pond is a trap. Relevant to the fenced retention pond in the geese story. Abstract checked.
 
+## Ecological traps and evolutionary rescue
+
+**Schlaepfer, M. A., Runge, M. C. and Sherman, P. W. (2002).** Ecological and evolutionary traps. *Trends in Ecology & Evolution* 17(10): 474-480. doi:10.1016/S0169-5347(02)02580-6. [USGS record](https://pubs.usgs.gov/publication/5224180)
+Sudden human changes to the environment can decouple formerly reliable cues from the outcomes they used to predict, trapping organisms that respond to them; a trapped population can go extinct if it falls below a critical size before adapting. The framing for the nest-choice mismatch and E10. Abstract checked (one source gives pages 478-480; USGS gives 474-480).
+
+**Gomulkiewicz, R. and Holt, R. D. (1995).** When does evolution by natural selection prevent extinction? *Evolution* 49: 201-207. [Gomulkiewicz lab publications](https://labs.wsu.edu/gomulki/publications/)
+Credited with coining "evolutionary rescue": a population declining after an abrupt environmental change persists only if adaptation outpaces the decline. Citation confirmed from bibliographies; abstract and full text not yet read.
+
+## Species facts
+
+**BioKIDS, University of Michigan.** Canada goose (*Branta canadensis*). [biokids.umich.edu](https://biokids.umich.edu/critters/Branta_canadensis)
+Goslings leave the nest as soon as 24 hours after hatching and are not ready to fly until about 44 days. A secondary source; replace with a primary account (e.g. Birds of the World) before the paper.
+
 ## Street-network form
 
 **Southworth, M. and Ben-Joseph, E. (1995).** Street standards and the shaping of suburbia. *Journal of the American Planning Association* 61(1): 65-81.
