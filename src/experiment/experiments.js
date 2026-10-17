@@ -24,6 +24,12 @@ export const EXPERIMENTS = {
             v('freeway, grass median', {layout: {type: 'freeway', median: 'grass'}}),
             v('freeway, jersey barrier', {layout: FWY_BARRIER}),
             v('freeway, barrier + 4 gaps', {layout: {...FWY_BARRIER, medianGaps: 4}}),
+            // At default volumes almost nobody survives eight lanes, so median design
+            // cannot matter. At a tenth of the traffic it can.
+            v('freeway x0.1, undivided', {layout: {type: 'freeway'}, traffic: {hazardMultiplier: 0.1}}),
+            v('freeway x0.1, grass median', {layout: {type: 'freeway', median: 'grass'}, traffic: {hazardMultiplier: 0.1}}),
+            v('freeway x0.1, jersey barrier', {layout: FWY_BARRIER, traffic: {hazardMultiplier: 0.1}}),
+            v('freeway x0.1, barrier + 4 gaps', {layout: {...FWY_BARRIER, medianGaps: 4}, traffic: {hazardMultiplier: 0.1}}),
         ],
     },
 
@@ -54,6 +60,11 @@ export const EXPERIMENTS = {
             v(`grid + arterials / ${nav}`, {layout: GRID, birds: {nav}}),
             v(`suburban / ${nav}`, {layout: {type: 'suburban'}, birds: {nav}}),
             v(`grid, fenced pond, 1 gap / ${nav}`, {layout: GRID, water: {type: 'pond', r: 18, fenced: true, fenceGaps: 1}, birds: {nav}}),
+            // Safe crossings with no fence to steer birds to them.
+            v(`freeway barrier + underpasses / ${nav}`, {layout: FWY_BARRIER, birds: {nav},
+                mitigations: [{type: 'underpasses', spacing: 60, classes: ['freeway']}]}),
+            v(`grid + arterial underpasses / ${nav}`, {layout: GRID, birds: {nav},
+                mitigations: [{type: 'underpasses', spacing: 40, classes: ['arterial']}]}),
         ]),
     },
 
@@ -130,9 +141,10 @@ export const EXPERIMENTS = {
     'e10-evolution': {
         kind: 'population',
         question: 'Does selection move nests toward water, and fast enough to save the population?',
-        variants: ['empty', 'grid', 'suburban'].flatMap(name => [false, true].map(evolve => {
-            const layout = name === 'empty' ? {type: 'empty'} : name === 'grid' ? GRID : {type: 'suburban'};
-            return v(`${name}, evolve=${evolve}`, {layout, nest: {predation: true},
+        variants: ['empty', 'quiet grid, calmed', 'quiet grid', 'grid + arterials'].flatMap(name => [false, true].map(evolve => {
+            const layout = name === 'empty' ? {type: 'empty'} : name.startsWith('quiet grid') ? {...GRID, arterialEvery: 0} : GRID;
+            const mitigations = name.endsWith('calmed') ? [{type: 'calming', factor: 0.3}] : [];
+            return v(`${name}, evolve=${evolve}`, {layout, mitigations, nest: {predation: true},
                 population: {years: 60, evolve, mutationSd: 0.1}});
         })),
     },

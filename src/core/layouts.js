@@ -230,15 +230,19 @@ function fenceRing(w, cx, cy, r, gaps, rng) {
     }
 }
 
-/** True if a disc of radius r at (cx, cy) touches no road. */
-function clearOfRoads(w, cx, cy, r) {
-    for (let y = Math.floor(cy - r); y <= Math.ceil(cy + r); y++) {
-        for (let x = Math.floor(cx - r); x <= Math.ceil(cx + r); x++) {
-            if (!w.inBounds(x, y)) return false;
-            if ((x - cx) ** 2 + (y - cy) ** 2 <= r * r && w.type[w.idx(x, y)] === ROAD) return false;
-        }
+/**
+ * A pond in its own small park: streets and buildings within the park are cleared, so
+ * the pond's fence (if any) is the only barrier at the shore. Streets that ran through
+ * the site now dead-end at the park, as they do around real retention ponds.
+ */
+function placePond(w, cx, cy, r, o, rng) {
+    const park = r + (o.fenceOffset ?? 2) + (o.parkMargin ?? 4);
+    for (let y = Math.floor(cy - park); y <= cy + park; y++) for (let x = Math.floor(cx - park); x <= cx + park; x++) {
+        if (w.inBounds(x, y) && Math.hypot(x - cx, y - cy) <= park) w.set(x, y, GREEN);
     }
-    return true;
+    disc(w, cx, cy, r);
+    w.ponds.push({cx, cy, r, fenced: !!o.fenced});
+    if (o.fenced) fenceRing(w, cx, cy, r + (o.fenceOffset ?? 2), o.fenceGaps ?? 0, rng);
 }
 
 export const WATERS = {
@@ -271,40 +275,26 @@ export const WATERS = {
 
     /** One round pond, optionally fenced (stormwater retention ponds often are). */
     pond(w, o, rng) {
-        const cx = (o.x ?? 0.5) * w.width, cy = (o.y ?? 0.5) * w.height;
-        const r = o.r ?? 15;
-        // A pond dropped into a city sits in its own small park: clear the streets and
-        // buildings around it so its fence (if any) is the only barrier at the shore.
-        const park = r + (o.fenceOffset ?? 2) + (o.parkMargin ?? 4);
-        for (let y = Math.floor(cy - park); y <= cy + park; y++) for (let x = Math.floor(cx - park); x <= cx + park; x++) {
-            if (w.inBounds(x, y) && Math.hypot(x - cx, y - cy) <= park) w.set(x, y, GREEN);
-        }
-        disc(w, cx, cy, r);
-        w.ponds.push({cx, cy, r, fenced: !!o.fenced});
-        if (o.fenced) fenceRing(w, cx, cy, r + (o.fenceOffset ?? 2), o.fenceGaps ?? 0, rng);
+        placePond(w, (o.x ?? 0.5) * w.width, (o.y ?? 0.5) * w.height, o.r ?? 15, o, rng);
     },
 
     /**
-     * `count` ponds placed at random where they touch no road. With `totalArea` the
-     * radius is chosen so all ponds together cover that many cells (for SLOSS-style
+     * `count` ponds at random, at least `minSep` cells apart. With `totalArea` the radius
+     * is chosen so all ponds together cover that many cells (for SLOSS-style
      * comparisons: one large pond or several small ones of equal total area).
      */
     ponds(w, o, rng) {
         const count = o.count ?? 5;
         const r = o.totalArea ? Math.sqrt(o.totalArea / (Math.PI * count)) : (o.r ?? 6);
-        const margin = r + (o.fenced ? (o.fenceOffset ?? 2) + 1 : 1);
+        const margin = r + (o.fenceOffset ?? 2) + (o.parkMargin ?? 4);
         const placed = [];
         for (let tries = 0; placed.length < count && tries < 5000; tries++) {
             const cx = rng.float(margin, w.width - margin), cy = rng.float(margin, w.height - margin);
-            if (!clearOfRoads(w, cx, cy, margin)) continue;
             if (placed.some(p => Math.hypot(p.cx - cx, p.cy - cy) < 2 * margin + (o.minSep ?? 10))) continue;
             placed.push({cx, cy});
         }
-        for (const {cx, cy} of placed) {
-            disc(w, cx, cy, r);
-            w.ponds.push({cx, cy, r, fenced: !!o.fenced});
-            if (o.fenced) fenceRing(w, cx, cy, r + (o.fenceOffset ?? 2), o.fenceGaps ?? 0, rng);
-        }
+        if (placed.length < count) throw new Error(`could only place ${placed.length} of ${count} ponds`);
+        for (const {cx, cy} of placed) placePond(w, cx, cy, r, o, rng);
     },
 };
 

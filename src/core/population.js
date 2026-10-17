@@ -11,8 +11,8 @@
  *     (density dependence happens off-map, on the wintering grounds).
  *
  * The growth rate per female is roughly adultSurvival + (juvenileSurvival / 2) * young
- * reaching water. With the defaults (0.6 and 0.15) the population replaces itself when
- * about 5.3 of 8 young reach water, which is why losses on the walk matter so much.
+ * reaching water. With the defaults (0.6 and 0.3) the population replaces itself when
+ * about 2.7 young per female reach water, before counting mothers killed on the walk.
  */
 
 import {Season} from './season.js';

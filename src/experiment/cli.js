@@ -7,6 +7,7 @@
  *   node src/experiment/cli.js all   [--seeds 1-10] [--force]
  *   node src/experiment/cli.js show  <experiment> [--metric youngArrivalRate]
  *   node src/experiment/cli.js one   <experiment> <variant label> [--seed 1]
+ *   node src/experiment/cli.js prune             # drop runs of variants no longer defined
  *
  * Results go to results/birds.sqlite. Runs already in the database are skipped
  * unless --force is given.
@@ -100,6 +101,17 @@ if (cmd === 'list' || !cmd) {
         kind: EXPERIMENTS[args[1]].kind ?? 'season', config: v.config, placement: v.placement});
     const {species, ...s} = r.summary;
     console.log(r.years ? r.years : s);
+} else if (cmd === 'prune') {
+    const store = new Store();
+    const keep = new Set(Object.entries(EXPERIMENTS).flatMap(([n, e]) => e.variants.map(v => `${n}\u0000${v.label}`)));
+    const stale = store.db.prepare('SELECT id, experiment, variant FROM runs').all()
+        .filter(r => !keep.has(`${r.experiment}\u0000${r.variant}`));
+    for (const r of stale) {
+        for (const t of ['broods', 'years']) store.db.prepare(`DELETE FROM ${t} WHERE run_id=?`).run(r.id);
+        store.db.prepare('DELETE FROM runs WHERE id=?').run(r.id);
+    }
+    console.log(`pruned ${stale.length} runs`);
+    store.close();
 } else {
     console.error(`unknown command '${cmd}'`);
     process.exit(1);

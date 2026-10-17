@@ -4,3 +4,4 @@ node_modules/
 results/*.sqlite
 results/*.sqlite-*
 __pycache__/
+results/snapshots/

@@ -82,7 +82,8 @@ export const DEFAULTS = {
         years: 40,
         capacity: 500,        // breeding females the landscape supports
         adultSurvival: 0.6,   // [lit] adult female mallard annual survival ~0.5-0.7
-        juvenileSurvival: 0.15, // [placeholder] water -> fledge -> first breeding season
+        juvenileSurvival: 0.3, // [placeholder] water -> fledge -> first breeding season; set so a
+                              // roadless landscape grows (lambda ~1.3 with nest predation)
         mutationSd: 0.05,     // on heritable nest weights
         evolve: false,        // whether wWater is heritable and mutates
     },
