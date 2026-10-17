@@ -117,7 +117,7 @@ Focal species: Canada goose. Cases: fabricated. Paper: both a planning result an
 
 ## Next steps
 
-1. Substack post: first draft in drafts/substack-01-birds-in-the-grid.md, awaiting Steven's edits and screenshots.
+1. Substack post: second draft (about half the length of the first) in drafts/substack-01-birds-in-the-grid.md, awaiting Steven's edits and screenshots. The full-length version, with the cut material, is in drafts/long-draft-birds-in-the-grid.md for the paper.
 2. Read the full texts of Hels and Buchwald (2001) and Rytwinski et al. (2016) and replace the traffic placeholders.
 3. Calibrate `transitHazard` against the overland-survival studies above.
 4. Switch defaults to Canada goose parameters.
