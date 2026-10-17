@@ -1,0 +1,17 @@
+{
+  "name": "birds-in-the-grid",
+  "version": "0.1.0",
+  "description": "Agent-based simulation of bird broods walking from nest to water across a human-built grid",
+  "type": "module",
+  "private": true,
+  "scripts": {
+    "test": "node --test 'test/*.test.js'",
+    "serve": "python3 -m http.server 8000",
+    "sim": "node src/experiment/cli.js",
+    "experiments": "node src/experiment/cli.js list",
+    "plots": "python3 analysis/plots.py"
+  },
+  "engines": {
+    "node": ">=22.5"
+  }
+}

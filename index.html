@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Birds in the Grid</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header>
+    <h1>Birds in the Grid</h1>
+    <p>Each dot is a mother bird leading her young from the nest she chose to the nearest water she knows of.
+        She can see which way the water is, but not the roads, fences, or gaps between her and it.</p>
+</header>
+<main>
+    <section class="controls">
+        <label>Experiment <select id="experiment"></select></label>
+        <label>Scenario <select id="variant"></select></label>
+        <label>Navigation
+            <select id="nav">
+                <option value="">(scenario default)</option>
+                <option value="greedy">greedy (knows the direction only)</option>
+                <option value="oracle">oracle (knows the whole map)</option>
+                <option value="random">random walk</option>
+            </select>
+        </label>
+        <label>Mothers <input id="mamas" type="number" value="500" min="1" max="5000"></label>
+        <label>Seed <input id="seed" type="number" value="1"></label>
+        <label>Speed (ticks / frame) <input id="speed" type="range" min="1" max="40" value="4"></label>
+        <label><input id="trails" type="checkbox" checked> trails</label>
+        <div class="buttons">
+            <button id="reset">Reset</button>
+            <button id="play">Play</button>
+            <button id="step">Step</button>
+        </div>
+        <div id="stats"></div>
+        <canvas id="bars" width="300" height="130"></canvas>
+        <div class="legend" id="legend"></div>
+    </section>
+    <section class="view">
+        <canvas id="world" width="720" height="720"></canvas>
+    </section>
+</main>
+<script type="module" src="src/browser/main.js"></script>
+</body>
+</html>
