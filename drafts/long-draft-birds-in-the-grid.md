@@ -16,7 +16,7 @@ Each season, 500 mothers choose nests. A mother looks at 20 random spots and tak
 
 Then the walk begins. Every tick, the mother steps to the neighbouring cell that brings her closest to the nearest water as the crow flies, with a little noise, and the brood moves with her. She knows which way the water is and nothing else about the map. So she would walk straight into a fence and stay there, except that each cell she has already visited costs her a small penalty, which lets her slide along a fence until she finds its end. I'll call her the greedy mother.
 
-On a road, each bird survives each lane independently, with a probability taken from a standard model in road ecology (the form Hels and Buchwald (2001) used for amphibians crossing roads). The chance of being killed crossing one lane is 1 − exp(−q a / v), where q is vehicles per second in the lane, a is the width of the strip in which a tyre can hit the bird, and v is the bird's walking speed. In words, the risk grows with traffic and with the time spent in the lane. For a busy arterial lane, at 700 vehicles an hour, a 0.7 m kill width and a walking speed of 0.4 m/s, that gives a 29% chance of death per lane, so a bird has a 26% chance of surviving all four lanes. A duckling reaches the other side only if both it and its mother survive, which is 0.26 × 0.26, or about 7%. If the mother dies, I count her remaining ducklings as lost.
+On a road, each bird survives each lane independently, with a probability that depends on traffic volume and how fast the bird crosses (the same ingredients from which Hels and Buchwald (2001) estimated the risk for amphibians crossing roads; their exact equation still needs checking against the full text). The chance of being killed crossing one lane is 1 − exp(−q a / v), where q is vehicles per second in the lane, a is the width of the strip in which a tyre can hit the bird, and v is the bird's walking speed. In words, the risk grows with traffic and with the time spent in the lane. For a busy arterial lane, at 700 vehicles an hour, a 0.7 m kill width and a walking speed of 0.4 m/s, that gives a 29% chance of death per lane, so a bird has a 26% chance of surviving all four lanes. A duckling reaches the other side only if both it and its mother survive, which is 0.26 × 0.26, or about 7%. If the mother dies, I count her remaining ducklings as lost.
 
 A brood is done when the mother steps into water, when she or all her ducklings die, or when the season runs out. The output is the share of ducklings that reach water.
 
@@ -40,7 +40,7 @@ At a tenth of the freeway traffic, the median starts to matter. An undivided fre
 
 The next scenarios compare whole street networks. On a grid of quiet streets, smaller blocks are worse: 25% of ducklings arrive with 50 m blocks, 33% with 100 m blocks, and 36% with 200 m blocks. A walk of a given length crosses more streets when the streets are closer together. Making every fourth street a four-lane arterial cuts the 100 m grid to 12.5%. A suburban layout of superblocks (cul-de-sacs and loops inside a frame of arterials, with sound walls and back fences) reaches 21%. Raising or lowering every road's traffic from a tenth to double the default moves the numbers a lot (the grid from 50% to 10%, the suburb from 52% to 20%), but the grid with arterials is worse than the suburb at every level I tried.
 
-These two patterns have a history in planning. Southworth and Ben-Joseph (1995) traced how engineering standards produced the curvilinear, cul-de-sac suburb. Boeing (2021), measuring street networks across the US, found that grid-like design declined from 1940 through the 1990s and has recovered somewhat since 2000. Boeing ties the interconnected grid to less driving and lower emissions, and to better road safety and physical activity. For a bird walking to water, the same interconnection means more streets to cross on a straight line. I don't read this as an argument against grids (the comparison is between two stylised maps, with placeholder traffic), but it's a cost that a planner weighing street patterns probably hasn't been asked to count.
+These two patterns have a history in planning. Southworth and Ben-Joseph (1995) traced how residential street standards evolved and shaped the American suburb. Boeing (2021), measuring street networks across the US, found that grid-like design declined from 1940 through the 1990s and has recovered somewhat since 2000. Boeing ties the interconnected grid to less driving and lower emissions, and to better road safety and physical activity. For a bird walking to water, the same interconnection means more streets to cross on a straight line. I don't read this as an argument against grids (the comparison is between two stylised maps, with placeholder traffic), but it's a cost that a planner weighing street patterns probably hasn't been asked to count.
 
 One finding in these runs surprised me. On grids with no buildings, a straight walk crosses a predictable number of streets, so survival can be worked out with a formula. For arterials the simulation sits on the formula, and for quiet residential streets it falls below it, by up to 14 points with 50 m blocks. The brood records show why. On quiet streets, a mother who steps onto a street running toward the water often walks along it, since a step down the street costs her no progress. Mothers that arrived had spent 19 ticks on road cells on average, where the straight line crosses 12. On arterials the mothers who lingered on the road didn't survive, so the survivors' road time matched the straight line.
 
@@ -68,7 +68,7 @@ On the grid as a whole, no single fix does much. Calming residential traffic to 
 
 [FIGURE: results/figures/e4-water.png]
 
-A retention pond is a stormwater pond, built to catch runoff from roads and roofs, and it is often fenced. Ecologists have asked whether ponds like this help wildlife or trap it. Sievers et al. (2018) found that frogs laid as many eggs in polluted stormwater wetlands as in clean ones, and that tadpoles in the polluted ones survived less, which they describe as the first empirical evidence of stormwater wetlands acting as ecological traps for frogs. Clevenot et al. (2018) reviewed 25 studies of the pond features that decide whether a stormwater pond is a trap or good breeding habitat for amphibians. The model doesn't say anything about water quality. It asks the simpler question of whether a bird can get into the pond at all.
+A retention pond is a stormwater pond, built to catch runoff from roads and roofs, and it is often fenced. Ecologists have asked whether ponds like this help wildlife or trap it. Sievers et al. (2018) found that frogs laid as many eggs in more-polluted stormwater wetlands as in less-polluted ones, and that tadpoles raised in more-polluted water survived less, which they describe as the first empirical evidence of stormwater wetlands acting as ecological traps for frogs. Clevenot et al. (2018) reviewed 25 studies of the pond features that decide whether a stormwater pond is a trap or good breeding habitat for amphibians. The model doesn't say anything about water quality. It asks the simpler question of whether a bird can get into the pond at all.
 
 Holding the total area of water fixed at 4 hectares on the grid with arterials, one central pond gets 34% of ducklings to water, four smaller ponds get 56%, and sixteen get 82%, because the nearest water is closer to more nests. Fence the ponds with no gaps, and all three drop to 2% or less. One 15 m gap in each fence brings the sixteen ponds back to 78%, and four gaps per fence to 80%. A single gap does nearly all the work, because a mother walking along a fence finds a gap in it the same way she finds the end of it.
 
@@ -116,7 +116,7 @@ Boeing, G. (2021). Off the grid... and back again? The recent evolution of Ameri
 
 Clevenot, L., Carré, C. and Pech, P. (2018). A review of the factors that determine whether stormwater ponds are ecological traps and/or high-quality breeding sites for amphibians. *Frontiers in Ecology and Evolution* 6: 40.
 
-Dodd, C. K., Barichivich, W. J. and Smith, L. L. (2004). Effectiveness of a barrier wall and culverts in reducing wildlife mortality on a heavily traveled highway in Florida. *Biological Conservation* 118: 619–631.
+Dodd, C. K., Barichivich, W. J. and Smith, L. L. (2004). Effectiveness of a barrier wall and culverts in reducing wildlife mortality on a heavily traveled highway in Florida. *Biological Conservation* 118(5): 619–631.
 
 Dzus, E. H. and Clark, R. G. (1997). Overland travel, food abundance, and wetland use by mallards: relationships with offspring survival. *The Wilson Bulletin* 109(3): 504–515.
 
@@ -130,7 +130,7 @@ Rytwinski, T., Soanes, K., Jaeger, J. A. G., Fahrig, L., Findlay, C. S., Houlaha
 
 Schlaepfer, M. A., Runge, M. C. and Sherman, P. W. (2002). Ecological and evolutionary traps. *Trends in Ecology & Evolution* 17(10): 474–480.
 
-Sievers, M., Parris, K. M., Swearer, S. E. and Hale, R. (2018). Stormwater wetlands can function as ecological traps for urban frogs. *Ecological Applications*. doi:10.1002/eap.1714.
+Sievers, M., Parris, K. M., Swearer, S. E. and Hale, R. (2018). Stormwater wetlands can function as ecological traps for urban frogs. *Ecological Applications* 28(4): 1106–1115.
 
 Simpson, J. W., Yerkes, T., Nudds, T. D. and Smith, B. D. (2007). Effects of habitat on mallard duckling survival in the Great Lakes region. *Journal of Wildlife Management* 71(6): 1885–1891.
 
@@ -138,7 +138,7 @@ Southworth, M. and Ben-Joseph, E. (1995). Street standards and the shaping of su
 
 Talent, L. G., Jarvis, R. L. and Krapu, G. L. (1983). Survival of mallard broods in south-central North Dakota. *The Condor* 85(1): 74–78.
 
-U.S. Geological Survey, Western Ecological Research Center (2025). Duckling survival higher if nests are closer to wetland habitats flooded during brood rearing (news release).
+Peterson, S. H., Ackerman, J. T., Hartman, C. A., Greenawalt, A. C., Casazza, M. L. and Herzog, M. P. (2024). Duckling survival increased with availability of flooded wetland habitat and decreased with salinity concentrations in a brackish marsh. *Ornithological Applications* 126(3): duae017. Figures as reported in the USGS news release "Duckling survival is higher if nests are closer to wetland habitats flooded during the summer" (29 December 2025).
 
 ---
 
