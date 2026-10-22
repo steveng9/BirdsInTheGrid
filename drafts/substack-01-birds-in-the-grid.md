@@ -4,23 +4,21 @@
 
 [SCREENSHOT 1: the fenced pond, mid-season. See the list at the end of this file.]
 
-Ducks and geese often nest well away from water, and their young can't fly for weeks (about 44 days, for Canada goslings [1]), so a day or so after hatching they walk to water behind their mother, sometimes for most of a kilometre [2]. She steers by old cues (cover, quiet, the direction of water), none of which say anything about four lanes of traffic.
+Ducklings and goslings can't fly for weeks (about 44 days, for Canada goslings [1]), so a brood that hatches away from water walks there behind its mother, sometimes for most of a kilometre [2]. In a city, that walk can cross four lanes of traffic, end at the concrete wall down the middle of a freeway, or stop at a fence around the pond it was headed for.
 
 Vehicles kill an estimated 96 million birds a year on roads in the continental US [3], and I haven't found anyone counting how many were broods on that first walk. So I built a simulation, which runs in your browser at [steveng9.github.io/BirdsInTheGrid](https://steveng9.github.io/BirdsInTheGrid/), to ask which streets cost the walk the most and which fixes help.
 
 ## The model
 
-The world is a 1.2 km square of 5 m cells (about one traffic lane each). A cell is ground, road, water, a tunnel under a road, or a wall (a building, a fence, or a freeway's median barrier).
+The world is a 1.2 km square of 5 m cells, each of them ground, road, water, a tunnel, or a wall (a building, a fence, or a freeway's median barrier). Each season, 500 mothers nest at the most secluded of 20 random spots, hatch 8 ducklings each, and lead them one cell at a time toward the nearest water as the crow flies, which is all a mother knows about the map. When a wall is in the way, a small penalty on cells she has already visited lets her slide along it to its end, and much of what follows comes down to where that sliding happens. I'll call her the greedy mother, and compare her with an oracle mother who knows the map and takes the safest route.
 
-Each season, 500 mothers nest at the most secluded of 20 random spots, hatch 8 ducklings each, and walk one cell at a time toward the nearest water as the crow flies, the only thing they know about the map. A small penalty on cells already visited lets a mother slide along a fence until she finds its end. I'll call her the greedy mother, and compare her with an oracle mother who knows the whole map and takes the safest route.
-
-Each lane kills a crossing bird with probability 1 − exp(−q a / v), where q is cars per second, a is the width a tyre can hit, and v is walking speed, the two ingredients Hels and Buchwald used to estimate road risk for amphibians [4]. On a busy arterial (700 cars an hour per lane), a brood walking at 0.4 m/s spends about 12 seconds in each lane, and two or three cars pass through it in that time. Each lane kills 29%, so 26% survive all four, and a duckling arrives only if its mother survives too (0.26 × 0.26, or about 7%). Most numbers are uncalibrated placeholders, so the results below (each averaged over 20 random maps) compare maps and predict no real place.
+Each lane kills a crossing bird with probability 1 − exp(−q a / v), where q is cars per second, a is the width a tyre can hit, and v is walking speed, the two ingredients Hels and Buchwald used to estimate road risk for amphibians [4]. On a busy arterial (700 cars an hour per lane), a brood walking at 0.4 m/s spends about 12 seconds in each lane, and two or three cars pass in that time. Each lane kills 29%, so 26% survive all four, and a duckling arrives only if its mother survives too (0.26 × 0.26, or about 7%). Most numbers are uncalibrated placeholders, so the results below (each averaged over 20 random maps) compare maps and predict nothing about a real place.
 
 [SCREENSHOT 2: one season on the grid with arterials, trails on, after the season ends.]
 
 ## A wall in the middle of the road
 
-With no roads, 99% of ducklings reach water. With one four-lane arterial across the map, 46% do, nearly all of them from the 42% of nests already on the water's side. A lightly travelled freeway lets 54% through. Put a jersey barrier down its middle and the figure is 42%, which is exactly the broods that never had to cross. In the browser you can watch mothers walk the inside lane looking for its end, which is the fence-following rule at work in the worst possible place. Four gaps in the barrier recover 1.5 points, because a mother can't see them and is usually hit before she reaches one.
+With no roads, 99% of ducklings reach water. One four-lane arterial across the map drops that to 46%, almost all from the 42% of nests already on the water's side. A freeway at a tenth of its usual traffic lets 54% through, and with a concrete jersey barrier down its middle, 42%, which is exactly the broods that never had to cross. A mother who reaches the barrier slides along it, which here means down the fast lane. Four gaps in the barrier recover 1.5 points, because she doesn't know where they are and is usually hit before she reaches one.
 
 [SCREENSHOT 3: the jersey barrier at a tenth of freeway traffic, mid-season.]
 
@@ -28,45 +26,45 @@ With no roads, 99% of ducklings reach water. With one four-lane arterial across 
 
 [FIGURE: results/figures/e2-urban-form.png]
 
-On a 100 m grid of quiet streets, 33% of ducklings arrive (25% with 50 m blocks, 36% with 200 m). Making every fourth street a four-lane arterial drops it to 12.5%. A suburb of superblocks (cul-de-sacs and loops inside a frame of arterials) reaches 21%, beating the grid with arterials at every traffic level I tried.
+On a grid of quiet streets with 100 m blocks, 33% of ducklings arrive, and smaller blocks do worse. Making every fourth street a four-lane arterial drops the grid to 12.5%. A suburb of superblocks (cul-de-sacs and loops inside a frame of arterials) reaches 21%, beating the grid with arterials at every traffic level I tried.
 
-Southworth and Ben-Joseph traced how residential street standards shaped the American suburb [5], and Boeing found that grid-like design, which goes with less driving, lower emissions, and safer roads, declined from 1940 through the 1990s and has recovered somewhat since 2000 [6]. A grid serves people on foot by offering many short routes. The bird is on foot too, but it takes only the straight one, and on a grid that line meets a street every block. Two stylised maps are no argument against grids, but they point to a cost planners probably haven't counted.
+Southworth and Ben-Joseph traced how residential street standards shaped the American suburb [5], and Boeing found that grid-like design, which goes with less driving, lower emissions, and safer roads, declined from 1940 through the 1990s and has recovered somewhat since 2000 [6]. A grid serves people on foot by offering many short routes. The bird is on foot too, but it takes only the straight one, and on a grid that line meets a street every block. Two stylised maps can't settle anything about grids, but they point to a cost planners probably haven't been asked to count.
 
 ## Tunnels the bird can't find
 
 [FIGURE: results/figures/e3-navigation.png]
 
-Knowing the map barely helps on the grid with arterials, where every route crosses the same roads. The oracle gets 12.4% of ducklings to water and the greedy mother 12.5% (a tenth of a point I put down to chance). With tunnels under the barrier freeway every 300 m, the oracle gets 99%, and the greedy mother 43%, one point more than with no tunnels. Add a drift fence (a low fence that walking animals follow sideways to a tunnel), and the greedy mother reaches 99% too, because the fence turns what she already does at a wall into a route.
+Knowing the map barely helps on the grid with arterials, where every route crosses the same roads. The oracle gets 12.4% of ducklings to water and the greedy mother 12.5% (a tenth of a point I put down to chance). With tunnels under the barrier freeway every 300 m, the oracle gets 99%, and the greedy mother 43%, one point more than with no tunnels, because she has no way of knowing there's a tunnel within 150 m. Add a drift fence (a low fence that walking animals follow sideways to a tunnel), and her sliding ends at a tunnel, so she reaches 99% too.
 
 [SCREENSHOT 4: tunnels under the barrier freeway, greedy and oracle side by side.]
 
-Field studies agree. Across 50 of them, fences cut road-kill by 54%, and crossing structures without fences had no detectable effect [7]. At one Florida lake, drift fences steering turtles to a culvert cut road deaths from 11.9 to 0.09 per km per day [8]. Back in the model, sixteen fenced crossings on the arterials raised arrivals from 12% to 13% when evenly spaced, and to 25% when sited at a pilot season's worst kill spots, the way roadkill surveys often site them.
+Field studies point the same way. Across 50 of them, fences cut road-kill by 54%, and crossing structures without fences had no detectable effect [7]. At one Florida lake, drift fences steering turtles to a culvert cut road deaths on each kilometre from about twelve a day to about one every eleven days [8]. In the model, sixteen fenced crossings on the arterials raised arrivals from 12% to 13% when evenly spaced, and to 25% when sited at a pilot season's worst kill spots, as real crossings often are from roadkill surveys.
 
 ## Fences around ponds
 
 [FIGURE: results/figures/e4-water.png]
 
-Frogs lay as many eggs in more-polluted stormwater wetlands as in less-polluted ones, though tadpoles in the more-polluted ones survive less often [9], and a review of 25 studies weighs when stormwater ponds act as traps or good breeding sites for amphibians [10]. The ponds are often fenced, so the model asks the earlier question of whether a bird can get in.
+Cities often fence the ponds they build to catch stormwater. Frogs lay as many eggs in more-polluted stormwater wetlands as in less-polluted ones, though tadpoles in the more-polluted ones survive less often [9], and a review of 25 studies weighs when such ponds act as traps or good breeding sites for amphibians [10]. The model asks the earlier question of whether a bird can get in.
 
-With 4 hectares of water on the grid with arterials, a single pond gets 34% of ducklings to water and sixteen smaller ponds 82%. Fence them with no gaps, and both drop to 2% or less. One 15 m gap per fence brings the sixteen ponds back to 78%. Gaps did almost nothing in the freeway barrier because the mother searched for them in the fast lane, but along a pond fence the search is safe.
+With 4 hectares of water on the grid with arterials, one pond gets 34% of ducklings to water and sixteen smaller ponds 82%, since scattered ponds put water near more nests. Fence them with no gaps, and both fall to 2% or less. One 15 m gap per fence brings the sixteen ponds back to 78%, because she slides along a pond fence on open ground instead of in the fast lane, and lives long enough to find the gap.
 
 ## Can the birds adapt?
 
 [SCREENSHOT 5: generations mode, the calmed grid with evolution, early and late.]
 
-A mother nesting far from water follows a cue that no longer predicts success (which ecologists call an ecological trap), and a trapped population can die out if it shrinks below a critical size before it adapts [11]. So I ran the model for 60 years, with each daughter inheriting her mother's preference for nesting near water, plus a little mutation. A population holds steady when about 2.7 young per female reach water.
+A mother nesting far from water follows a cue (seclusion) that no longer predicts success (which ecologists call an ecological trap), and a trapped population can die out if it shrinks below a critical size before it adapts [11]. So I ran the model for 60 years and let each daughter inherit her mother's preference for nesting near water, plus a little mutation (the preference starts at zero, and nests near the shore lose more eggs to predators).
 
 [FIGURE: results/figures/e10-evolution.png]
 
 On the grid with arterials, the population is gone in about 9 years whether or not it evolves. On the quiet grid, evolution stretches survival from 14 years to 19, and still every run dies out. With that grid's traffic calmed to 30% of its hazard, 5 of 30 populations last 60 years without evolution, and 24 of 30 with it.
 
-The preference evolves at about the same rate on every map, so the difference is time. The quiet grid loses about 60% of its females a year and is down to about five by the time young per female reach 2.2. The calmed grid loses about 10% a year, bottoms out near 100 females, and recovers once young per female pass 2.7, which is the standard picture of evolutionary rescue [12]. Calming traffic saved 5 of 30 populations on its own, and slowed the decline enough for the birds' own adaptation to save 24!
+The preference rises at about the same rate on every map with roads (right panel), so the difference is time. The quiet grid loses about 60% of its females a year and is down to about five before the preference has raised their success enough to replace them. The calmed grid loses about 10% a year, bottoms out a little above 100 females, and then recovers (the solid orange line on the left), which is the standard picture of evolutionary rescue [12]. Calming traffic saved 5 of 30 populations on its own, and slowed the decline enough for the birds' own adaptation to save 24!
 
 ## What comes next
 
 The model leaves out curbs, storm drains, and broods that split up, and treats the walk away from roads as nearly free, which three mallard studies support [13, 14, 15] and one in California's Suisun Marsh doesn't (broods hatched farther from water survived less often) [2].
 
-I'm setting this project down for a new simulation. Whoever picks it up (possibly me) could start by replacing the traffic placeholders with field numbers, searching for the best placement of a fixed number of crossings, and testing for the fence-end effect Dodd and colleagues saw in Florida, where after a barrier wall went up, about 73% of the remaining kills (treefrogs aside) fell on the 400 m just past its end [16]. If you work in road ecology or urban planning (both new to me) and something here looks wrong, I'd like to hear about it. The code is on [GitHub](https://github.com/steveng9/BirdsInTheGrid).
+I'm setting this project down for a new simulation. Whoever picks it up (possibly me) could start with field numbers for the traffic, a search for the best placement of a fixed number of crossings, and a test for the fence-end effect Dodd and colleagues saw in Florida, where after a barrier wall went up, about 73% of the remaining kills (treefrogs aside) fell on the 400 m just past its end [16]. If you work in road ecology or urban planning (both new to me) and something here looks wrong, I'd like to hear about it. The code is on [GitHub](https://github.com/steveng9/BirdsInTheGrid).
 
 ## References
 
